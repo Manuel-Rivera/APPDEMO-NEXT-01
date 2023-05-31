@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { FC, FunctionComponent } from 'react'
+
+
+
 
 //Se pasa el hijo
-export const LigthLayout = ({children}:any) => {
+export const LigthLayout:FC<{children?:React.ReactNode}> = ({children}) => {
   return (
     <div>
         {/* Declarando stylos directamente sobre un componente */}

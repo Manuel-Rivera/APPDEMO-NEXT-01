@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { MainLayoaut } from '@/components/layouts/MainLayoaut'
-import { LigthLayout } from '@/components/layouts/LigthLayout'
 
 
 export default function HomePage() {

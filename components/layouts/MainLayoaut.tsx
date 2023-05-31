@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { FC } from 'react'
 import { Inter } from 'next/font/google'
 import { Navbar } from '../Navbar'
 import styles from './MainLayoaut.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 
-export const MainLayoaut = ({children}:any) => {
+export const MainLayoaut:FC<{children?:React.ReactNode}> = ({children}) => {
     return (
         <div>
           <Head>

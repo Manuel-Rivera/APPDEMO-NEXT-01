@@ -3,6 +3,7 @@ import styles from './Navbar.module.css'
 import {ActiveLink} from './ActiveLink'
 import { Inter } from 'next/font/google'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -33,7 +34,11 @@ export const Navbar = () => {
 
     {/* Tarea final de la sección agregar rutas de manera dianmica*/}
     {
-      menuItems.map(({text,href})=><ActiveLink key={href} text={text} href={href} ></ActiveLink>)
+      menuItems.map(({text,href})=>{
+        return(
+          <ActiveLink key={href} text={text} href={href} ></ActiveLink>
+        )
+    })
     }
    </nav>
   )
