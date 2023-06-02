@@ -2,6 +2,11 @@
   "name": "siiaweb",
   "version": "0.1.0",
   "private": true,
+  "licence": "MIT",
+  "author": {
+    "name": "Manuel Rivera",
+    "email": "manriv154@gmail.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +14,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^1.0.0-beta.13",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
+    "axios": "^1.4.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "next": "13.4.4",
