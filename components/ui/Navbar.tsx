@@ -15,7 +15,7 @@ export const Navbar = () => {
         padding:"0x 20px",
         backgroundColor:theme?.colors.gray100.value
     }}>
-      <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/132.svg" alt='icono de la app' width={40} height={40}/>
+      <Image src="https://www.freepnglogos.com/uploads/pokeball-png/pokeball-alexa-style-blog-pokemon-inspired-charmander-daily-8.png" alt='icono de la app' width={40} height={40}/>
       <NextLink href="/" style={{display:'flex', flexDirection:'row'}}>
         {/* <Link> */}
           <Text color='white' h2>p</Text>

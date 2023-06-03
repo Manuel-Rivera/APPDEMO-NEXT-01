@@ -1,19 +1,47 @@
 import { pokeApi } from '@/api';
 import { Layout } from '@/components/layouts'
 import { Pokemon } from '@/interfaces';
+import { getPokemonInfo, localFavorites } from '@/utils';
 import { Button, Card, Container, Grid, Image, Text } from '@nextui-org/react';
 import { NextPage,GetStaticProps,GetStaticPaths} from 'next'
-import { useRouter } from 'next/router'
-import React from 'react'
+import { useEffect, useState } from 'react';
+
+import confetti from 'canvas-confetti';
 
 interface Props{
   pokemon:Pokemon;
 }
 
 const PokemonPage:NextPage<Props> =({pokemon})=> {
+  //Revisar si el poekemon esta en el locastorage
+  //const [isInFavorite,setIsInFavorite]=useState(localFavorites.existInFavorites(pokemon.id));
+  const [isInFavorite,setIsInFavorite]=useState(false);
+  
+  useEffect(() => {
+    setIsInFavorite(localFavorites.existInFavorites(pokemon.id));
+  }, [pokemon])
+  
+
+  const onToggleFavorite=()=>{
+    localFavorites.ToggleFavorites(pokemon.id);
+    setIsInFavorite(!isInFavorite);
+    if(isInFavorite) return;
+
+    confetti({
+      zIndex:999,
+      particleCount:100,
+      spread:160,
+      angle:-100,
+      origin:{
+        x:1,
+        y:0
+      }
+    })
+  }
+
   
   return (
-    <Layout title='Algun pokemon'>
+    <Layout title={pokemon.name} >
       <Grid.Container css={{marginTop:'5px',}} gap={2}>
         <Grid xs={12} sm={4}>
           <Card isHoverable css={{padding:'30px'}}>
@@ -35,17 +63,17 @@ const PokemonPage:NextPage<Props> =({pokemon})=> {
           <Text h1 transform='capitalize'>
             {pokemon.name}
           </Text>
-          <Button color='gradient' ghost>
-                Guardar en favoritos
-            </Button>
+          <Button color='gradient' ghost={!isInFavorite} onPress={onToggleFavorite}>
+                {isInFavorite ? 'En Favoritos' : 'Guardar en favoritos' }
+          </Button>
         </Card.Header>
         <Card.Body>
           <Text size={30}>Sprites</Text>
           <Container display='flex' direction='row'>
-            {/* <Image src={pokemon.sprites.front_default} alt={pokemon.name} width={100} height={100}/>
+            <Image src={pokemon.sprites.front_default} alt={pokemon.name} width={100} height={100}/>
             <Image src={pokemon.sprites.back_default} alt={pokemon.name} width={100} height={100}/>
             <Image src={pokemon.sprites.front_shiny} alt={pokemon.name} width={100} height={100}/>
-            <Image src={pokemon.sprites.back_shiny} alt={pokemon.name} width={100} height={100}/> */}
+            <Image src={pokemon.sprites.back_shiny} alt={pokemon.name} width={100} height={100}/>
           </Container>
         </Card.Body>
         </Card>
@@ -63,12 +91,10 @@ const PokemonPage:NextPage<Props> =({pokemon})=> {
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const {id}=params as {id:string};
-  const {data}=await pokeApi.get<Pokemon>(`/pokemon/${id}`);
   
-
   return {
     props: {
-     pokemon:data
+     pokemon:await getPokemonInfo(id)
     }
   }
 }

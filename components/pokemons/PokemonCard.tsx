@@ -8,7 +8,11 @@ export const PokemonCard:FC<{pokemon:SmallPokemon}> = ({pokemon:{id,img,name}}) 
     const router=useRouter();
 
     const onClick=()=>{
-        router.push(`/pokemon/${id}`)
+      //Visualizar pokemon por id
+      //router.push(`/pokemon/${id}`)
+      //Visualizar pokemon por nombre
+      router.push(`/name/${name}`)
+
     }
 
     //const {id,img,name}=pokemon;
@@ -16,7 +20,7 @@ export const PokemonCard:FC<{pokemon:SmallPokemon}> = ({pokemon:{id,img,name}}) 
     <Grid key={id} xs={6} sm={3} md={2} xl={1}>
     <Card isHoverable onClick={onClick} isPressable>
       <Card.Body css={{p:1}}>
-        {/* <Card.Image src={img} width="100%" height={140}/> */}
+        <Card.Image src={img} width="100%" height={140}/>
       </Card.Body>
       <Card.Footer>
         <Row justify="space-between">
